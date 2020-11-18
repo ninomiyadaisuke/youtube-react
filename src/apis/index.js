@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-const KEY = 'AIzaSyCytrHAqEwwr2Vtg55bARkw0rcz7PE-DsE'
+// const KEY = 'AIzaSyCytrHAqEwwr2Vtg55bARkw0rcz7PE-DsE'
+const KEY = 'AIzaSyCljasQWyfmG2wvGZ6ImlyM992GyJptvkE'
+
+
 
 const youtube = axios.create({
     baseURL: "https://www.googleapis.com/youtube/v3"
@@ -8,7 +11,7 @@ const youtube = axios.create({
 
 const params = {
             part: "snippet",
-            maxResults: 3,
+            maxResults: 1,
             key: KEY,
             regionCode: "JP",
             type: "video",
@@ -31,4 +34,13 @@ export const fetchSelectedData = async (id) => {
             id
         }
     })
+}
+
+export const fetchRelatedData = async (id) => {
+    return await youtube.get('/search'), {
+        params: {
+            ...params,
+            relatedToVideoId: id
+        }
+    }
 }
